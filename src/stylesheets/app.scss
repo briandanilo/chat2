@@ -1,16 +1,29 @@
-$big-font: 15rem;
-
-.jumbo {
-    color: #333;
-    font-size: $big-font;
-    margin: 0;
-    text-shadow: 1px 2px 1px #DEDEDE, 2px 3px 0 #FEFEFE, -1px -1px 0 #222;
+body{
+  margin: 50px;
+}
+.status {
+  color: white;
+  margin: 2px;
+  margin-left: 20px;
+}
+.deleteBtn{
+  float: right;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+.col-lg-6 {
+  margin-bottom: 50px;
+  margin-top: 50px;
 }
 
-html {
-    body {
-        margin: 0;
-        padding: 0;
-        background: #CACACA;
-    }
+.list-group-item p{
+  color: gray;
+}
+
+.list-group-item{
+  display: block;
+}
+.input-group {
+  margin-bottom: 25px;
 }

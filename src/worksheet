@@ -1,0 +1,50 @@
+function deleteListItem(id){
+  var settings = {
+    type: 'DELETE',
+    url: apiBaseUrl+db+'/'+id,
+  }
+  $.ajax(settings).then(function(data,status,xhr){
+    console.log("deleted ",settings,data)
+  })
+}
+
+
+function readDbAndFlushList(id){
+  if (!id) id=""
+  var settings = {
+    type: 'GET',
+    contentType: 'application/json',
+    url: apiBaseUrl+db+'/'+id,
+  }
+  $('.list-group').empty();
+  $.ajax(settings).then(function(data,status,xhr){
+    data.forEach(function(item,index,array){
+      console.log("item ",item)
+      renderListItems(item);
+    })
+  })
+}
+
+function renderListItems(item){
+  $('.list-group').append(
+      '<li class="list-group-item">'+item.description+'<button type="button" class="btn btn-default deleteBtn" id="'+item._id+'">Delete</button><button type="button" id="'+item._id+'" class="btn btn-default status '+item.status+'">'+item.status+'</button></li>'
+    )
+}
+
+$('.list').on('click', '.deleteBtn', function(e){
+  deleteListItem(e.currentTarget.id);
+})
+
+$('.list').on('click', '.status', function(e){
+  let id = e.currentTarget.id;
+  console.log("change status! ");
+  (e.currentTarget.innerText == "incomplete") ? changeListItemStatus(id,"complete") : changeListItemStatus(id,"incomplete")
+})
+
+$('#submitBtn').on('click',function(e){
+  let formVal = $('#newItemForm').val();
+  if (formVal !="")
+    createNewListItem(formVal)
+  else
+    alert("you clown")
+})
